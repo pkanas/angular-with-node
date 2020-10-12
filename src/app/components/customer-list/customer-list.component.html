@@ -1,0 +1,49 @@
+<div class="list row">
+    <div class="col-md-6">
+      <h4>customers List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let customer of customers; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveTutorial(customer, i)"
+        >
+          {{ customer.name }}
+        </li>
+      </ul>
+  
+    </div>
+    <div class="col-md-6 magi">
+      <div *ngIf="currentCustomer">
+        <mat-card class="card">
+          <h4>Customer</h4>
+          <div>
+            <label><strong>Manager Name:</strong></label> {{ currentCustomer.name }}
+          </div>
+          <div>
+            <label><strong>Manager Designation:</strong></label>
+            {{ currentCustomer.designation }}
+          </div>
+          <div>
+            <label><strong>Manager email:</strong></label>
+            {{ currentCustomer.email }}
+          </div>
+          <div>
+            <label><strong>Manager qualification:</strong></label>
+            {{ currentCustomer.qualification }}
+          </div>
+
+    
+          <a mat-button class="badge badge-warning" href="/customers/{{ currentCustomer.id }}">
+            Edit
+          </a>
+        </mat-card>
+  
+      </div>
+  
+      <div *ngIf="!currentCustomer">
+        <br />
+        <p>Please click on a Customer...</p>
+      </div>
+    </div>
+  </div>

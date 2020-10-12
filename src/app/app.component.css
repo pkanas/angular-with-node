@@ -1,0 +1,9 @@
+mat-toolbar {
+    display: inline-flex;
+    justify-content: space-between;
+    color: white;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
