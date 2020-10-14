@@ -1,5 +1,10 @@
+mat-card {
+    margin-top: 5rem;
+    width: 80%;
+}
+
 .form-group {
-    width: 500px;
+    width: 300px;
 }
 
 
@@ -10,4 +15,29 @@
 .submit-form {
     width: 80%;
     margin: auto;
+}
+
+table {
+    width: 645px;
+    border: none;
+}
+
+.addMore {
+    width: 30%;
+    margin-left: 30px;
+    
+}
+
+.remove {
+    width: 40px;
+    margin-top: 20px;
+}
+
+.saveButton {
+    height: 40px;
+    width: 120px;
+}
+
+td {
+    height: 15px;
 }

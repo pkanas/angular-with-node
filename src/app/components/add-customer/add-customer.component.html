@@ -1,84 +1,153 @@
-
-
-<form class="submit-form" #form="ngForm">
-    <div *ngIf="!submitted">
-      <div class="form-group">
-        <label for="name">Manager Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="name"
-          required
-          [(ngModel)]="customer.name"
-          name="name"
-          #name="ngModel"
-        />
-        <span class="text-danger"
-          *ngIf="name.touched && name.errors?.required">
-            Name is required
-        </span>
-      </div>
-  
-      <div class="form-group">
-        <label for="designation">Manager Designation</label>
-        <input
-          class="form-control"
-          id="designation"
-          required
-          [(ngModel)]="customer.designation"
-          name="designation"
-          #designation="ngModel"
-        />
-        <span class="text-danger"
-        *ngIf="designation.touched && designation.errors?.required">
-          designation is required
-      </span>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Manager Email</label>
-        <input
-          class="form-control"
-          id="email"
-          [(ngModel)]="customer.email"
-          type="email"
-          name="email"
-          required
-          email
-          #email="ngModel"
-        />
-        <span class="text-danger"
-        *ngIf="email.touched && email.errors?.required">
-        email is required
-      </span>
-      </div>
-
-      <div class="form-group">
-        <label for="qualification">Manager Qualification</label>
-        <select class="browser-default custom-select" id="qualification"
-        [(ngModel)]="customer.qualification"  name="qualification" class="form-control"
-        #qualification="ngModel">
-          <option selected>Open this select menu</option>
-          <option value="Btech">B-Tech</option>
-          <option value="MCA">MCA</option>
-          <option value="MBA">MBA</option>
-          <option value="BCA">BCA</option>
-          <option value="BSC">BSC</option>
-        </select>
-        <span class="text-danger"
-        *ngIf="qualification.touched && qualification.errors?.required">
-        qualification is required
-      </span>
-      </div>
-
-
+<mat-card>
+  <div class="container">
+    <form class="submit-form" [formGroup]="customerForm">
+      <div *ngIf="!submitted">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="name">Manager Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                required
+                [(ngModel)]="customer.name"
+                formControlName="name"
+              />
+              <span *ngIf="!customerForm.get('name').valid && customerForm.get('title').touched" class="help-block"
+                      style="color:red">
+                      manager name is reuired
+                  </span>
+            </div>
+        
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="designation">Manager Designation</label>
+              <input
+                class="form-control"
+                id="designation"
+                required
+                [(ngModel)]="customer.designation"
+                formControlName="designation"
+              />
+              <span *ngIf="!customerForm.get('designation').valid && customerForm.get('designation').touched" class="help-block"
+                      style="color:red">
+                      manager designation is reuired
+                  </span>
+            </div>
+          </div>
+        </div>
+      
      
   
-      <button  (click)="saveCustomer()" class="btn btn-success">Submit</button>
-    </div>
+        <!-- <div class="form-group">
+          <div class="col-sm-2">
+            <button type="button" class="btn btn-success"
+            (click)="addSkillButtonClick()">
+              add
+            </button>
+          </div>
+        </div> -->
   
-    <div *ngIf="submitted">
-      <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" (click)="newCustomer()">Add</button>
-    </div>
-</form>
+        <table class="table table-bordered" formArrayName="subordinate">
+          <tr>
+            <th colspan="2">Add: Name & Designation</th>
+            <th width="150px">
+              <button type="button" (click)="addSubordinate()" class="btn btn-primary addMore"
+              ><i class="fa fa-plus" aria-hidden="true"></i></button>
+            </th>
+          </tr>
+          <tr *ngFor="let sub of subordinate().controls; let i=index" [formGroupName]="i">
+            <td>
+                Name :
+                <input type="text" id="sname" formControlName="sname" name="sname"
+                 class="form-control"  [(ngModel)]="sub.sname">
+                <!-- <span *ngIf="!customerForm.get('sname').valid && customerForm.get('sname').touched" class="help-block"
+                style="color:red">
+                manager sname is reuired
+            </span> -->
+            </td>
+            <td>
+                designation:
+                <input type="text" id="sdesignation" name="sdesignation" 
+                formControlName="sdesignation" class="form-control" 
+                [(ngModel)]="sub.sdesignation">
+                <!-- <span *ngIf="!customerForm.get('sdesignation').valid && customerForm.get('sdesignation').touched" 
+                class="help-block"
+                style="color:red">
+                manager sdesignation is reuired
+            </span> -->
+            </td>
+            <td>
+                <button (click)="removeSubordinate(i)" class="btn btn-danger remove"><i class="fa fa-trash" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+        </table>
+
+        <div>
+          <p>{{subordinate().controls | json}} fyguhhhhk</p>
+        </div>
+      
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="email">Manager Email</label>
+              <input
+                class="form-control"
+                id="email"
+                [(ngModel)]="customer.email"
+                type="email"
+                name="email"
+                required
+                email
+                formControlName="email"
+              />
+              <span *ngIf="!customerForm.get('email').valid && customerForm.get('email').touched" class="help-block"
+                      style="color:red">
+                      manager email is reuired
+                  </span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="qualification">Manager Qualification</label>
+              <select class="browser-default custom-select" id="qualification"
+              [(ngModel)]="customer.qualification" class="form-control"   
+                 formControlName="qualification">
+                <option selected>Open this select menu</option>
+                <option value="Btech">B-Tech</option>
+                <option value="MCA">MCA</option>
+                <option value="MBA">MBA</option>
+                <option value="BCA">BCA</option>
+                <option value="BSC">BSC</option>
+              </select>
+              <span *ngIf="!customerForm.get('qualification').valid && customerForm.get('qualification').touched" class="help-block"
+              style="color:red">
+              manager qualification is reuired
+          </span>
+            </div>
+          </div>
+        </div>
+  
+  
+       
+        
+        <button  [disabled]="!customerForm.valid"  (click)="saveCustomer()" class="btn btn-outline-success saveButton">Submit</button>
+
+      </div>
+     
+    
+      <div *ngIf="submitted">
+        <h4>You submitted successfully!</h4>
+        <button class="btn btn-success " (click)="newCustomer()">Add</button>
+      </div>
+  </form>
+  
+  </div>
+</mat-card>
+
+
+
+
+

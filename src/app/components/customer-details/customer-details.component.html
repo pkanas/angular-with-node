@@ -1,80 +1,99 @@
-<div *ngIf="currentCustomer" class="edit-form">
+<mat-card>
+  <div class="container">
+  <div *ngIf="currentCustomer" class="edit-form">
     <form>
-      <div class="form-group">
-        <label for="name">Manager Name</label>
-        <input
+     <div class="row">
+       <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Manager Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            [(ngModel)]="currentCustomer.name"
+            name="name"
+            required
+            #name="ngModel"
+          />
+          <span class="text-danger"
+          *ngIf="name.touched && name.errors?.required">
+            Name is required
+        </span>
+        </div>
+      </div>
+        <div class="col-md-6">  <div class="form-group">
+          <label for="designation">Manager Designation</label>
+          <input
+            type="text"
+            class="form-control"
+            id="designation"
+            [(ngModel)]="currentCustomer.designation"
+            name="designation"
+            required
+            #designation="ngModel"
+          />
+          <span class="text-danger"
+          *ngIf="designation.touched && designation.errors?.required">
+          designation is required
+        </span>
+        </div></div>
+       </div>
+  
+    
+      
+    
+      <div class="row">
+        <div class="col-md-6">   <div class="form-group">
+          <label for="email">Manager Email</label>
+          <input
           type="text"
-          class="form-control"
-          id="name"
-          [(ngModel)]="currentCustomer.name"
-          name="name"
-          required
-          #name="ngModel"
-        />
-        <span class="text-danger"
-        *ngIf="name.touched && name.errors?.required">
-          Name is required
-      </span>
+            class="form-control"
+            id="email"
+            required
+            [(ngModel)]="currentCustomer.email"
+            name="email"
+            #email="ngModel"
+          />
+          <span class="text-danger"
+          *ngIf="email.touched && email.errors?.required">
+          email is required
+        </span>
+        </div></div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="qualification">Manager Qualification</label>
+            <select class="browser-default custom-select" id="qualification"
+            [(ngModel)]="currentCustomer.qualification"  name="qualification" class="form-control">
+            <option selected>Open this select menu</option>
+            <option value="Btech">B-Tech</option>
+            <option value="MCA">MCA</option>
+            <option value="MBA">MBA</option>
+            <option value="BCA">BCA</option>
+            <option value="BSC">BSC</option>
+            </select>
+          </div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="designation">Manager Designation</label>
-        <input
-          type="text"
-          class="form-control"
-          id="designation"
-          [(ngModel)]="currentCustomer.designation"
-          name="designation"
-          required
-          #designation="ngModel"
-        />
-        <span class="text-danger"
-        *ngIf="designation.touched && designation.errors?.required">
-        designation is required
-      </span>
-      </div>
+   
 
-      <div class="form-group">
-        <label for="email">Manager Email</label>
-        <input
-        type="text"
-          class="form-control"
-          id="email"
-          required
-          [(ngModel)]="currentCustomer.email"
-          name="email"
-          #email="ngModel"
-        />
-        <span class="text-danger"
-        *ngIf="email.touched && email.errors?.required">
-        email is required
-      </span>
-      </div>
-
-      <div class="form-group">
-        <label for="qualification">Manager Qualification</label>
-        <select class="browser-default custom-select" id="qualification"
-        [(ngModel)]="currentCustomer.qualification"  name="qualification" class="form-control">
-        <option selected>Open this select menu</option>
-        <option value="Btech">B-Tech</option>
-        <option value="MCA">MCA</option>
-        <option value="MBA">MBA</option>
-        <option value="BCA">BCA</option>
-        <option value="BSC">BSC</option>
-        </select>
-      </div>
+  
     </form>
   
   
-    <button mat-raised-button color="warn" class=" mr-2" (click)="deleteCustomerl()">
+    <!-- <button mat-raised-button color="warn" class=" mr-2" (click)="deleteCustomerl()">
       Delete
-    </button>
+    </button> -->
   
     <button mat-raised-button color="primary" type="submit"  (click)="updateCustomerl()">
       Update
     </button>
     <p>{{ message }}</p>
   </div>
-  
+  </div>
+</mat-card>
+
+
+
   <div *ngIf="!currentCustomer">
     <br />
     <p>Cannot access this Customer...</p>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class CustomersListComponent implements OnInit {
   currentCustomer = null;
   currentIndex = -1;
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+              private router: Router) { }
 
   ngOnInit() {
     this.retrieveTutorials();
@@ -41,5 +43,17 @@ export class CustomersListComponent implements OnInit {
     this.currentIndex = index;
   }
 
+  deleteCustomerl() {
+    this.customerService.delete(this.currentCustomer.id)
+      .subscribe(
+        response => {
+          console.log(response);
+          // this.router.navigate(['/customers']);
+          this.refreshList();
+        },
+        error => {
+          console.log(error);
+        });
+  }
   
 }

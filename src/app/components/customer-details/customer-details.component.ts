@@ -57,4 +57,6 @@ export class CustomerDetailsComponent implements OnInit {
           console.log(error);
         });
   }
+
+  
 }

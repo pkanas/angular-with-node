@@ -1,8 +1,16 @@
-.form-group {
-    width: 500px;
+mat-card {
+    margin-top: 5rem;
+    width: 80%;
 }
 
+.form-group {
+    width: 300px;
+}
 
+table {
+    width: 500px;
+
+}
 .text-danger {
     color: red;
 }
@@ -10,4 +18,8 @@
 .submit-form {
     width: 80%;
     margin: auto;
+}
+
+.table {
+    width: 300px;
 }

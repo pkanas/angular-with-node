@@ -27,23 +27,42 @@
           <div>
             <label><strong>Manager email:</strong></label>
             {{ currentCustomer.email }}
-          </div>
+          </div>          
           <div>
             <label><strong>Manager qualification:</strong></label>
             {{ currentCustomer.qualification }}
           </div>
 
+
+          <div>
+            <h3>Subordinates</h3>
+          </div>
+          <div>
+            <table style="width: 100%;">
+              <tr *ngFor="let sOrd of currentCustomer.subordinates" style="margin-top: 0.75em; border-bottom: 2px solid gray;;">
+                <td><h5>{{sOrd.name}}</h5></td>
+                <td><small>{{sOrd.designation}}</small></td>
+              </tr>
+            </table>
+          </div>
+          <br>
+          <br>
+          
+
     
           <a mat-button class="badge badge-warning" href="/customers/{{ currentCustomer.id }}">
             Edit
           </a>
+          <button mat-raised-button color="warn" class="mr-2 deletButton" (click)="deleteCustomerl()">
+            Delete
+          </button>
         </mat-card>
   
       </div>
   
-      <div *ngIf="!currentCustomer">
+      <!-- <div *ngIf="!currentCustomer">
         <br />
         <p>Please click on a Customer...</p>
-      </div>
+      </div> -->
     </div>
   </div>
